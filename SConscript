@@ -4,6 +4,6 @@ cwd = GetCurrentDir()
 path = [cwd+'/inc']
 src  = Glob('src/*.c')
  
-group = DefineGroup('led', src, depend = ['PKG_USING_LED'], CPPPATH = path)
+group = DefineGroup('quick_led', src, depend = ['PKG_USING_QLED'], CPPPATH = path)
 
 Return('group')
