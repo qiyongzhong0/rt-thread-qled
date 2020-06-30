@@ -21,7 +21,7 @@ typedef enum{
     QLED_MODE_SPECIAL
 }qled_mode_t;
 
-typedef __packed struct
+typedef struct
 {
     s16 pin;
     u8 mode;
