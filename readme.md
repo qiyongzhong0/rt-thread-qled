@@ -72,6 +72,7 @@ Quick Led package 遵循 LGPLv2.1 许可，详见 `LICENSE` 文件。
 ### 2.2使用示例
 
 ####示例1. 以指定频率和占空比控制led闪烁
+
 	qled_add(24, 1);//加24号引脚led到驱动，高电平点亮
 	
 	qled_set_blink(24, 50, 50);//设置led以10Hz闪烁，亮50ms，灭50ms
