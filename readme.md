@@ -10,15 +10,15 @@
 
 ``` 
 qled
-├───inc                             // 头文件目录
-│   |   qled.h                  	// API 接口头文件
-│   └───qled_sample.h           	// 示例头文件
-├───src                             // 源码目录
-│   |   qled.c                  	// 主模块
-│   └───qled_samplec             	// 示例模块
-│   LICENSE                         // 软件包许可证
-│   README.md                       // 软件包使用说明
-└───SConscript                      // RT-Thread 默认的构建脚本
+├───inc   						// 头文件目录
+│   |   qled.h            		// API 接口头文件
+│   └───qled_sample.h     		// 示例头文件
+├───src                   		// 源码目录
+│   |   qled.c            		// 主模块
+│   └───qled_samplec  			// 示例模块
+│	license  					// 软件包许可证
+│	readme.md					// 软件包使用说明
+└───SConscript					// RT-Thread 默认的构建脚本
 ```
 
 ### 1.2许可证
@@ -73,47 +73,51 @@ Quick Led package 遵循 LGPLv2.1 许可，详见 `LICENSE` 文件。
 
 ####示例1. 以指定频率和占空比控制led闪烁
 
-	qled_add(24, 1);//加24号引脚led到驱动，高电平点亮
-	
-	qled_set_blink(24, 50, 50);//设置led以10Hz闪烁，亮50ms，灭50ms
-	rt_thread_mdelay(5000);//时间5s
-	
-	qled_set_blink(24, 50, 450);//设置led以2Hz闪烁，亮50ms，灭450ms
-	rt_thread_mdelay(10000);//时间10s
-	
-	qled_remove(24);//不再需要led了，从驱动中移除
+```
+qled_add(24, 1);//加24号引脚led到驱动，高电平点亮
+
+qled_set_blink(24, 50, 50);//设置led以10Hz闪烁，亮50ms，灭50ms
+rt_thread_mdelay(5000);//时间5s
+
+qled_set_blink(24, 50, 450);//设置led以2Hz闪烁，亮50ms，灭450ms
+rt_thread_mdelay(10000);//时间10s
+
+qled_remove(24);//不再需要led了，从驱动中移除
+```
 
 ####示例2. 发送SOS信号
 
-	#define QLED_SOS_PIN GET_PIN(B, 9) //25号
-	
-	static int sos_send_times = 0;//发送sos信号次数计数
-	static const u16 sos_datas[] = //定义sos信号时间数据
-	{
-	    200, 200, 200, 200, 200, 200,       //short 3 times
-	    600, 600, 600, 600, 600, 600,       //long 3 times
-	    200, 200, 200, 200, 200, 200 + 2000 //short 3 times and 2000ms interval
-	};
-	
-	static void qled_sos_cb(void)//定义特殊序列执行结束回调函数
-	{
-	    sos_send_times--;
-	    if (sos_send_times > 0)//执行次数未到
-	    {
-	        qled_set_special(QLED_SOS_PIN, sos_datas, sizeof(sos_datas)/sizeof(u16), qled_sos_cb);//再次执行
-	    }
-	    else//执行完成
-	    {
-	        qled_remove(QLED_SOS_PIN);//不需要了，从驱动移除
-	    }
-	}
-	
-	void qled_send_sos(void)//执行发送sos信号，发送5次SOS信号, 总用时40s
-	{
-	    sos_send_times = 5;//设置发送次数为5
-	    qled_add(QLED_SOS_PIN, 1);//加引脚led到驱动
-	    qled_set_special(QLED_SOS_PIN, sos_datas, sizeof(sos_datas)/sizeof(u16), qled_sos_cb);//启动执行特殊序列
-	}
+```
+#define QLED_SOS_PIN GET_PIN(B, 9) //25号
+
+static int sos_send_times = 0;//发送sos信号次数计数
+static const u16 sos_datas[] = //定义sos信号时间数据
+{
+    200, 200, 200, 200, 200, 200,       //short 3 times
+    600, 600, 600, 600, 600, 600,       //long 3 times
+    200, 200, 200, 200, 200, 200 + 2000 //short 3 times and 2000ms interval
+};
+
+static void qled_sos_cb(void)//定义特殊序列执行结束回调函数
+{
+    sos_send_times--;
+    if (sos_send_times > 0)//执行次数未到
+    {
+        qled_set_special(QLED_SOS_PIN, sos_datas, sizeof(sos_datas)/sizeof(u16), qled_sos_cb);//再次执行
+    }
+    else//执行完成
+    {
+        qled_remove(QLED_SOS_PIN);//不需要了，从驱动移除
+    }
+}
+
+void qled_send_sos(void)//执行发送sos信号，发送5次SOS信号, 总用时40s
+{
+    sos_send_times = 5;//设置发送次数为5
+    qled_add(QLED_SOS_PIN, 1);//加引脚led到驱动
+    qled_set_special(QLED_SOS_PIN, sos_datas, sizeof(sos_datas)/sizeof(u16), qled_sos_cb);//启动执行特殊序列
+}
+```
 
 ### 2.3获取组件
 
