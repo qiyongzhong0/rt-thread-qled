@@ -71,7 +71,7 @@ int qled_set_on(int pin);
 int qled_set_blink(int pin, int ton_ms, int toff_ms);
 
 /* 
- * @brief   set led off alway 
+ * @brief   set led run special sequence 
  * @param   pin         - led control pin
  * @param   datas       - led on/off time datas, unit : ms
  * @param   data_total  - data total
