@@ -71,7 +71,7 @@ Quick Led package 遵循 LGPLv2.1 许可，详见 `LICENSE` 文件。
 
 ### 2.2使用示例
 
-####示例1. 以指定频率和占空比控制led闪烁
+#### 示例1. 以指定频率和占空比控制led闪烁
 
 ```
 qled_add(24, 1);//加24号引脚led到驱动，高电平点亮
@@ -85,7 +85,7 @@ rt_thread_mdelay(10000);//时间10s
 qled_remove(24);//不再需要led了，从驱动中移除
 ```
 
-####示例2. 发送SOS信号
+#### 示例2. 发送SOS信号
 
 ```
 #define QLED_SOS_PIN GET_PIN(B, 9) //25号
@@ -142,5 +142,4 @@ void qled_send_sos(void)//执行发送sos信号，发送5次SOS信号, 总用时
 
 * 维护：qiyongzhong
 * 主页：https://gitee.com/qiyongzhong0/rt-thread-qled
-
-
+* 邮箱：917768104@qq.com
