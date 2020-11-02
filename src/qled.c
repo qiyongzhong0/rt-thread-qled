@@ -204,7 +204,7 @@ static void qled_thread_entry(void *params)
     }
 }
 
-static void qled_init(void)
+static int qled_init(void)
 {
     rt_thread_t tid = rt_thread_create(QLED_THREAD_NAME, 
                                         qled_thread_entry, 
@@ -213,6 +213,7 @@ static void qled_init(void)
                                         QLED_THREAD_PRIO, 
                                         20);
     rt_thread_startup(tid);
+    return(0);
 }
 INIT_PREV_EXPORT(qled_init);
 
