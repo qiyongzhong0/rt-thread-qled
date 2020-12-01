@@ -9,6 +9,7 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <qled.h>
+#include <string.h>
 
 #define DBG_TAG "qled"
 #define DBG_LVL DBG_INFO
