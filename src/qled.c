@@ -4,6 +4,7 @@
  * Change Logs:
  * Date           Author            Notes
  * 2020-06-22     qiyongzhong       first version
+ * 2021-08-30     qiyongzhong       fix initialize
  */
      
 #include <rtthread.h>
@@ -196,8 +197,6 @@ static void qled_run(void)
 
 static void qled_thread_entry(void *params)
 {
-    qled_datas_init();
-
     while(1)
     {
         qled_run();
@@ -207,17 +206,14 @@ static void qled_thread_entry(void *params)
 
 static int qled_init(void)
 {
-    rt_thread_t tid = rt_thread_create(QLED_THREAD_NAME, 
-                                        qled_thread_entry, 
-                                        NULL, 
-                                        QLED_THREAD_STACK_SIZE, 
-                                        QLED_THREAD_PRIO, 
-                                        20);
+    rt_thread_t tid = rt_thread_create(QLED_THREAD_NAME, qled_thread_entry, NULL, 
+                                        QLED_THREAD_STACK_SIZE, QLED_THREAD_PRIO, 20);
+    RT_ASSERT(tid != RT_NULL);
+    qled_datas_init();
     rt_thread_startup(tid);
-    return(0);
+    return(RT_EOK);
 }
 INIT_PREV_EXPORT(qled_init);
-
 
 int qled_add(int pin, int level)
 {
