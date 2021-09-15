@@ -337,7 +337,7 @@ int qled_set_blink(int pin, int ton_ms, int toff_ms)
     rt_enter_critical();
 
     qled_datas[idx].cnt = 0;
-    qled_datas[idx].idx = -1;
+    qled_datas[idx].idx = (u8)-1;
     qled_datas[idx].ton_ms = ton_ms;
     qled_datas[idx].toff_ms = toff_ms;
     qled_datas[idx].mode = QLED_MODE_BLINK;
@@ -368,7 +368,7 @@ int qled_set_special(int pin, const u16 *datas, int data_total, void (*over_cb)(
     rt_enter_critical();
     
     qled_datas[idx].cnt = 0;
-    qled_datas[idx].idx = -1;
+    qled_datas[idx].idx = (u8)-1;
     qled_datas[idx].datas = datas;
     qled_datas[idx].total = data_total;
     qled_datas[idx].over_cb = over_cb;
