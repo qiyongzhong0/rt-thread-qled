@@ -141,5 +141,6 @@ void qled_send_sos(void)//执行发送sos信号，发送5次SOS信号, 总用时
 ## 3. 联系方式
 
 * 维护：qiyongzhong
+* 主页：https://github.com/qiyongzhong0/rt-thread-qled
 * 主页：https://gitee.com/qiyongzhong0/rt-thread-qled
 * 邮箱：917768104@qq.com
